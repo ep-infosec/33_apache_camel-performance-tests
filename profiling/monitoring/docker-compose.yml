@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  jfr-datasource:
+    image: "croway/jfr-datasource:2.1.0"
+    container_name: jfr-datasource
+    network_mode: host
+  grafana:
+    image: "grafana/grafana"
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-simple-json-datasource
+    container_name: grafana
+    volumes:
+      - ./provisioning:/etc/grafana/provisioning
+      - ./dashboards:/var/lib/grafana/dashboards
+    network_mode: host

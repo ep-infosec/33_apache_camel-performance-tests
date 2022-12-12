@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.apache.camel.tests</groupId>
+        <artifactId>profiling</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>profiling-kafka-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Camel Performance :: Profiling :: Kafka Parent</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven.compiler.parameters>true</maven.compiler.parameters>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+
+        <quarkus.version>2.11.3.Final</quarkus.version>
+        <quarkus.container-image.build>true</quarkus.container-image.build>
+        <quarkus.container-image.group>quay.io/oscerd</quarkus.container-image.group>
+        <quarkus.container-image.name>${project.artifactId}</quarkus.container-image.name>
+
+        <camel-k-runtime.version>1.14.0</camel-k-runtime.version>
+        <camel-quarkus.version>2.11.0</camel-quarkus.version>
+        <camel-kamelets-catalog.version>0.9.0</camel-kamelets-catalog.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-bom</artifactId>
+                <version>${quarkus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel.k</groupId>
+                <artifactId>camel-k-runtime-bom</artifactId>
+                <version>${camel-k-runtime.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel.quarkus</groupId>
+                <artifactId>camel-quarkus-bom</artifactId>
+                <version>${camel-quarkus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-maven-plugin</artifactId>
+                <version>${quarkus.version}</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>generate-code</goal>
+                            <goal>generate-code-tests</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <modules>
+        <module>kafka-s3</module>
+        <module>kafka-s3-exchange-pooling</module>
+        <module>kafka-sqs</module>
+        <module>kafka-sqs-exchange-pooling</module>
+        <module>kafka-azure-storage-blob</module>
+        <module>kafka-azure-storage-blob-exchange-pooling</module>
+        <module>kafka-azure-storage-queue</module>
+        <module>kafka-azure-storage-queue-exchange-pooling</module>
+        <module>kafka-minio</module>
+        <module>kafka-minio-exchange-pooling</module>
+        <module>kafka-mongo</module>
+        <module>kafka-mongo-exchange-pooling</module>
+        <module>kafka-nats</module>
+        <module>kafka-nats-exchange-pooling</module>
+        <module>kafka-postgresql</module>
+        <module>kafka-postgresql-exchange-pooling</module>
+        <module>kafka-solr</module>
+        <module>kafka-solr-exchange-pooling</module>
+        <module>minio-kafka</module>
+        <module>minio-kafka-exchange-pooling</module>
+        <module>mongo-kafka</module>
+        <module>mongo-kafka-exchange-pooling</module>
+        <module>nats-kafka</module>
+        <module>nats-kafka-exchange-pooling</module>
+        <module>postgresql-kafka</module>
+        <module>postgresql-kafka-exchange-pooling</module>
+        <module>s3-kafka</module>
+        <module>s3-kafka-exchange-pooling</module>
+    </modules>
+
+</project>
